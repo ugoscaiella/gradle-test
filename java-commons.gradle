@@ -18,6 +18,12 @@ class NestedPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.configure(project) {
             apply plugin: 'com.github.johnrengelman.shadow'
+            shadowJar {
+                mergeServiceFiles()
+                exclude 'META-INF/*.SF'
+                exclude 'META-INF/*.DSA'
+                exclude 'META-INF/*.RSA'
+            }
         }
 
 
@@ -47,12 +53,12 @@ ext {
     gitCommit = fetchGitCommit()
 }
 
-shadowJar {
-    mergeServiceFiles()
-    exclude 'META-INF/*.SF'
-    exclude 'META-INF/*.DSA'
-    exclude 'META-INF/*.RSA'
-}
+// shadowJar {
+//     mergeServiceFiles()
+//     exclude 'META-INF/*.SF'
+//     exclude 'META-INF/*.DSA'
+//     exclude 'META-INF/*.RSA'
+// }
 
 processResources {
 
